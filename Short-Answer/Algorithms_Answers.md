@@ -2,13 +2,11 @@
 
 ## Exercise I
 
-a)
+a) Linear: O(n) --> Loops based on n
 
+b) Polynomial O(n^2) --> Loops until it's equal to
 
-b)
-
-
-c)
+c) Linear O(n) --> Recursion calling on itself
 
 ## Exercise II
 
