@@ -96,8 +96,58 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # RULES:
+            # You may use any pre-defined robot methods.
+            # You may NOT modify any pre-defined robot methods.
+            # You may use logical operators. (`if`, `and`, `or`, `not`, etc.)
+            # You may use comparison operators. (`>`, `>=`, `<`, `<=`, `==`, `is`, etc.)
+            # You may use iterators. (`while`, `for`, `break`, `continue`)
+            # You may NOT store any variables. (`=`)
+            # You may NOT access any instance variables directly. (`self._anything`)
+            # You may NOT use any Python libraries or class methods. (`sorted()`, etc.)
+            # You may define robot helper methods, as long as they follow all the rules.
+        # Type of sorts: (Need best sort for swapping)
+            # Selection sort --> Don't think I can used this because can't store any variable
+            # Bubble Sort --> Best swapping method, go with this kind of sort for swapping items.
+            # Insertion sort --> Doesn't go well with swapping items
+        # Pseudocode for Bubble sort:
+            # Compare i to i+1 in the item array. If item is smaller, swap, if not, move on.
+            # Swaps 'None' with value in the list
+            # Note above: Light should be used in this situation for the robot to go through all of the steps. 
+            # This means that the light should be used to start and end the movements
+            # So the robot must have its light on to start. While the light is on, the starting item None should be swapped.
+            # Then the robot will move right if it can move right
+            # It will then compare the items and based on constraints above, if compare_it() == 1, then it should swap items.
+            # Then the roboto should keep moving left to go back to the beginning until it encounters None.
+            # Once there, the robot should swap the item with the starting position again when back at the beginning
+            # Check if the robot can go right again. If it can, then repeat the bubble sort, and if it can't then set the lights off and be done.
+            # So if it can no longer move right, then the lights should be turned off and everything has been sorted.
+        
+        self.set_light_on()
+        while self.light_is_on():
+            # Swap item with None
+            if self._item == None:
+                self.swap_item()
+            # Move to the list to the right
+            while self.can_move_right():
+                self.move_right()
+
+                # Compare item to item in list. If item is larger than item in list, comparing will return one, so swap the items.
+                if self.compare_item() == 1:
+                    self.swap_item()
+            
+            # Move to the left if we don't encounter None
+            while self.can_move_left() == True and self.compare_item() is not None:
+                self.move_left()
+            
+            # When back at the starting position, items should be swapped.
+            self.swap_item()
+            # Check if we can go further to the right (because back at starting position). 
+            # If we can't move right, then we've reached the end of the list and that means that everything is sorted and the light can turn off
+            if self.can_move_right() is not True:
+                self.set_light_off()
+            else:
+                self.move_right()
 
 
 if __name__ == "__main__":
